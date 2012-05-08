@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+
+{{if not ok:
+=T('To be able to send us emails from \'%(email)s\' address please fill in the following form. Thank you!',dict(email=email))
+=form
+else:}}
+{{=T('The \'%(email)s\' address is now allowed to send e-mails to us.',dict(email=email))}}
+{{pass}}
