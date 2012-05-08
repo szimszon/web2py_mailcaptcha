@@ -1,0 +1,8 @@
+!.gitignore
+*.pyc
+cache/*
+databases/*
+errors/*
+sessions/*
+uploads/*
+
