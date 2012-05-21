@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//controllers/default.py=utf-8
 encoding//controllers/plugin_mailcaptcha.py=utf-8
+encoding//models/db.py=utf-8
+encoding//models/menu.py=utf-8
 encoding//models/plugin_mailcaptcha.py=utf-8

@@ -36,3 +36,23 @@ def index():
 	return dict( form = form,
 							ok = ok,
 							email = email )
+
+@auth.requires_login()
+def whitelist():
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_whitelist ) )
+
+@auth.requires_login()
+def blacklist():
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_blacklist ) )
+
+@auth.requires_login()
+def apply_on():
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_apply_on ) )
+
+@auth.requires_login()
+def settings():
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_settings ) )
+
+@auth.requires_login()
+def queue():
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_queue ) )
