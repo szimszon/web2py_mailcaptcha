@@ -4,3 +4,5 @@ encoding//controllers/plugin_mailcaptcha.py=utf-8
 encoding//models/db.py=utf-8
 encoding//models/menu.py=utf-8
 encoding//models/plugin_mailcaptcha.py=utf-8
+encoding//models/tasks.py=utf-8
+encoding//private/mailcaptcha.py=utf-8
