@@ -35,8 +35,7 @@ def plugin_mailcaptcha_sendmail( id ):
 	mail.settings.sender = plugin_mailcaptcha_config.mail_sender
 	mail.settings.login = plugin_mailcaptcha_config.mail_login if len( plugin_mailcaptcha_config.mail_login ) > 0 else None
 	mail.settings.server = plugin_mailcaptcha_config.mail_server
-	msg_vars = {'from': plugin_mailcaptcha_config.mail_sender,
-							'to' :mail_queue_row.email,
+	msg_vars = {'from': mail_queue_row.email,
 							'url': '%s%s' % ( plugin_mailcaptcha_config.webserver_url,
 															URL( 'plugin_mailcaptcha', 'index', vars = dict( 
 																														i = mail_queue_row.uuid

@@ -3,7 +3,7 @@
 #
 # Exec as:
 #
-# python ./web2py -R applications/mailcaptcha/private/mailcaptcha.py -S mailcaptcha -M
+# python ./web2py.py -R applications/mailcaptcha/private/mailcaptcha.py -S mailcaptcha -M
 # #####################################################################################
 
 import logging
