@@ -33,6 +33,8 @@ class MyTCPHandler( SocketServer.StreamRequestHandler ):
 					if sor == '' and len( self.data ) > 0:
 						break
 					( key, value ) = sor.split( '=', 1 )
+					key = key.strip()
+					value = value.strip()
 					self.data[key] = value
 				logger.debug( 'data: %s' % str( self.data ) )
 				# we can't handle mail without recipient or sender

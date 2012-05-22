@@ -33,9 +33,19 @@ def index():
 		ok = True
 		db.plugin_mailcaptcha_whitelist.insert( email = row.email )
 		db( db.plugin_mailcaptcha_queue.email == row.email ).delete()
+	if plugin_mailcaptcha_config.greetings:
+		txt = MARKMIN( plugin_mailcaptcha_config.greetings % dict( sender = email ) )
+	else:
+		txt = T( 'To be able to send us emails from \'%(email)s\' address please fill in the following form. Thank you!', dict( email = email ) )
+	if plugin_mailcaptcha_config.successful:
+		successful = MARKMIN( plugin_mailcaptcha_config.successful % dict( sender = email ) )
+	else:
+		successful = T( 'The \'%(email)s\' address is now allowed to send e-mails to us.', dict( email = email ) )
 	return dict( form = form,
 							ok = ok,
-							email = email )
+							email = email,
+							txt = txt,
+							successful = successful )
 
 @auth.requires_login()
 def whitelist():
@@ -56,3 +66,11 @@ def settings():
 @auth.requires_login()
 def queue():
 	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_queue ) )
+
+@auth.requires_login()
+def scheduler_task():
+	return dict( grid = SQLFORM.grid( db.scheduler_task ) )
+
+@auth.requires_login()
+def scheduler_run():
+	return dict( grid = SQLFORM.grid( db.scheduler_run ) )
