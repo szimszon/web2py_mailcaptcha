@@ -88,7 +88,7 @@ def queue():
 															)
 							)]
 	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_queue,
-																	orderby = ~db.plugin_mailcaptcha_queue.created_on,
+																	orderby = ~db.plugin_mailcaptcha_queue.id,
 																	links = links ) )
 
 @auth.requires_login()
