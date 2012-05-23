@@ -3,6 +3,7 @@
 '!=': '!=',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN',
 '%(nrows)s records found': '%(nrows)s records found',
+'%(url)s - URL, %(from)s - from email address': '%(url)s - URL, %(from)s - from email address',
 '%(url)s - URL, %(from)s - from email address, %(to) - to email address': '%(url)s - URL, %(from)s - from email address, %(to) - to email address',
 '%Y-%m-%d': '%Y.%m.%d.',
 '%Y-%m-%d %H:%M:%S': '%Y.%m.%d. %H:%M:%S',
