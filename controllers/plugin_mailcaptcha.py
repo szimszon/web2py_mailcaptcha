@@ -49,15 +49,18 @@ def index():
 
 @auth.requires_login()
 def whitelist():
-	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_whitelist ) )
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_whitelist,
+																	orderby = db.plugin_mailcaptcha_whitelist.email ) )
 
 @auth.requires_login()
 def blacklist():
-	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_blacklist ) )
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_blacklist,
+																	orderby = db.plugin_mailcaptcha_blacklist.email ) )
 
 @auth.requires_login()
 def apply_on():
-	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_apply_on ) )
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_apply_on,
+																	orderby = db.plugin_mailcaptcha_apply_on.email ) )
 
 @auth.requires_login()
 def settings():
@@ -65,12 +68,51 @@ def settings():
 
 @auth.requires_login()
 def queue():
-	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_queue ) )
+	links = [dict( header = '',
+						body = lambda r:DIV( 
+															A( T( 'Put to the whitelist' ),
+																callback = URL( 'to_whitelist',
+																							vars = dict( email = r.email ),
+																							user_signature = True ),
+																delete = "tr",
+																_class = "btn"
+															 ),
+															BR(),
+															A( T( 'Put to the blacklist' ),
+																callback = URL( 'to_blacklist',
+																							vars = dict( email = r.email ),
+																							user_signature = True ),
+																delete = "tr",
+																_class = "btn"
+															 )
+															)
+							)]
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_queue,
+																	orderby = ~db.plugin_mailcaptcha_queue.created_on,
+																	links = links ) )
 
 @auth.requires_login()
 def scheduler_task():
-	return dict( grid = SQLFORM.grid( db.scheduler_task ) )
+	return dict( grid = SQLFORM.grid( db.scheduler_task,
+																	orderby = ~db.scheduler_task.id ) )
 
 @auth.requires_login()
 def scheduler_run():
-	return dict( grid = SQLFORM.grid( db.scheduler_run ) )
+	return dict( grid = SQLFORM.grid( db.scheduler_run,
+																	orderby = ~db.scheduler_run.id ) )
+
+@auth.requires_signature()
+def to_whitelist():
+	if not request.vars.email:
+		raise HTTP( 'Invalid request' )
+	if db( db.plugin_mailcaptcha_whitelist.email == request.vars.email ).count() == 0:
+		db.plugin_mailcaptcha_whitelist.insert( email = request.vars.email )
+	return dict()
+
+@auth.requires_signature()
+def to_blacklist():
+	if not request.vars.email:
+		raise HTTP( 'Invalid request' )
+	if db( db.plugin_mailcaptcha_blacklist.email == request.vars.email ).count() == 0:
+		db.plugin_mailcaptcha_blacklist.insert( email = request.vars.email )
+	return dict()

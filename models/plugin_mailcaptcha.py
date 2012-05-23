@@ -34,6 +34,7 @@ db.define_table( 'plugin_mailcaptcha_queue',
 									),
 							auth.signature
  )
+db.plugin_mailcaptcha_queue.created_on.readable = True
 db.define_table( 'plugin_mailcaptcha_whitelist',
 							Field( 'email', 'string',
 									label = T( 'E-mail' ),
@@ -41,6 +42,10 @@ db.define_table( 'plugin_mailcaptcha_whitelist',
 									),
 							auth.signature
  )
+db.plugin_mailcaptcha_whitelist.created_by.readable = True
+db.plugin_mailcaptcha_whitelist.created_on.readable = True
+db.plugin_mailcaptcha_whitelist.modified_by.readable = True
+db.plugin_mailcaptcha_whitelist.modified_on.readable = True
 db.define_table( 'plugin_mailcaptcha_blacklist',
 							Field( 'email', 'string',
 									label = T( 'E-mail' ),
@@ -48,6 +53,10 @@ db.define_table( 'plugin_mailcaptcha_blacklist',
 									),
 							auth.signature
  )
+db.plugin_mailcaptcha_blacklist.created_by.readable = True
+db.plugin_mailcaptcha_blacklist.created_on.readable = True
+db.plugin_mailcaptcha_blacklist.modified_by.readable = True
+db.plugin_mailcaptcha_blacklist.modified_on.readable = True
 db.define_table( 'plugin_mailcaptcha_apply_on',
 							Field( 'email', 'string',
 									label = T( 'E-mail' ),
@@ -55,6 +64,10 @@ db.define_table( 'plugin_mailcaptcha_apply_on',
 									),
 							auth.signature
  )
+db.plugin_mailcaptcha_apply_on.created_by.readable = True
+db.plugin_mailcaptcha_apply_on.created_on.readable = True
+db.plugin_mailcaptcha_apply_on.modified_by.readable = True
+db.plugin_mailcaptcha_apply_on.modified_on.readable = True
 db.define_table( 'plugin_mailcaptcha_settings',
 							Field( 'webserver_url', 'string',
 									label = T( 'Webserver url' ),
@@ -130,7 +143,10 @@ db.define_table( 'plugin_mailcaptcha_settings',
 									),
 							auth.signature
  )
-
+db.plugin_mailcaptcha_settings.created_by.readable = True
+db.plugin_mailcaptcha_settings.created_on.readable = True
+db.plugin_mailcaptcha_settings.modified_by.readable = True
+db.plugin_mailcaptcha_settings.modified_on.readable = True
 plugin_mailcaptcha_config = db( db.plugin_mailcaptcha_settings.id > 0 ).select( orderby = db.plugin_mailcaptcha_settings.id ).first()
 
 if auth.user:
