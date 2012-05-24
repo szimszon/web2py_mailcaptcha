@@ -1,0 +1,68 @@
+MailCaptcha
+===========
+
+This app is partially an web2py plugin - but need a non-plugin task file for 
+scheduling sender and admin notifications.
+
+Installing the web2py application
+----------------------------------
+
+Get it from github and clone it to web2py applications directory:
+ git clone https://szimszon@github.com/szimszon/web2py_mailcaptcha.git mailcaptcha
+
+You should have a registered user to set up the MailCaptcha with the
+ Mailcaptcha -> Settings menu
+
+ Webserver url: Like: "https://mailcaptcha.domain.com/", don't put application name at the end
+ Web page message: Web e-mail approval page message
+ Web page successful message: Web e-mail approval successful message
+ Mail server: The mail server for sending the notifications	
+ Mail sender: The sender of the notifications
+ Mail login: If you need a login to send e-mails
+ Mail subject: Approval mail subject
+ Mail text: Approval mail body
+ Admin approval subject: Notification subject about the admin approved the e-mail address
+ Admin approval text: Notification body about the admin approved the e-mail address
+ Mail notify recipient: Admin notification recipient
+ Mail notify subject: Admin notification subject
+ Mail notify text: Admin notification body
+ defer_if_permit reply text: The message the mail system should send if message is deferred
+ reject reply text: The message the mail system should send if message is rejected due the blacklist
+ Listening hostname: The host where the MailCaptcha policyd should listen on
+ Listening port: The port where the MailCaptcha policyd should listen on
+ Queue entry timeout: The time the queue entry (sender e-mail address) is valid 
+ 
+You should have a scheduler process set up for mailcaptcha to.
+
+Set up a scheduler task with
+ Function name: plugin_mailcaptcha_del_old_queue_entries
+
+Installing the MailCaptcha policyd
+----------------------------------
+ 
+There is a python script in mailcaptcha/private/:
+ mailcaptcha.py
+It should be run with the web2py environment like:
+ python ./web2py.py -R applications/mailcaptcha/private/mailcaptcha.py -S mailcaptcha -M
+
+There is an init script for that:
+ mailcaptcha/private/web2py-mailcaptcha
+
+You should adjust some of the variables in the beginning of the script.
+
+Postfix setup
+-------------
+
+Add to the main.cf:
+ smtpd_recipient_restrictions = 
+                 ...
+                 reject_unauth_destination 
+                 check_policy_service inet:<Listening hostname>:<Listening port>
+                 ...
+
+Set up the protected e-mail addresses
+--------------------------------------
+
+It can be done through the
+ Mailcaptcha -> Apply on
+menu.
