@@ -152,6 +152,11 @@ db.define_table( 'plugin_mailcaptcha_settings',
 									label = T( 'Listening port' ),
 									default = 9999
 									),
+							Field( 'queue_timeout', 'integer',
+									label = T( 'Queue entry timeout' ),
+									default = 1440,
+									requires = IS_NOT_EMPTY(),
+									comment = T( 'Time the e-mail entry is valid in the queue in minutes' ) ),
 							auth.signature
  )
 db.plugin_mailcaptcha_settings.created_by.readable = True

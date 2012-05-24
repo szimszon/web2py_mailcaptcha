@@ -9,6 +9,14 @@ if 0:
 	service = Service()
 	crud = Crud()
 	settings = Storage()
+def plugin_mailcaptcha_del_old_queue_entries():
+	import datetime
+	from_time = datetime.datetime.now() - datetime.timedelta( seconds = ( plugin_mailcaptcha_config.queue_timeout ) * 60 )
+	rows = db( db.plugin_mailcaptcha_queue.created_on < from_time )
+	deleted = rows.count()
+	rows.delete()
+	db.commit()
+	return dict( rows = deleted )
 
 def plugin_mailcaptcha_sendmail( id ):
 	import logging
@@ -56,4 +64,5 @@ def plugin_mailcaptcha_sendmail( id ):
 	return dict()
 
 from gluon.scheduler import Scheduler
-Scheduler( db, dict( plugin_mailcaptcha_sendmail = plugin_mailcaptcha_sendmail ) )
+Scheduler( db, dict( plugin_mailcaptcha_sendmail = plugin_mailcaptcha_sendmail,
+										plugin_mailcaptcha_del_old_queue_entries = plugin_mailcaptcha_del_old_queue_entries ) )

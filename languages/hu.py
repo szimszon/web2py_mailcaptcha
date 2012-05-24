@@ -1,5 +1,7 @@
 # coding: utf8
 {
+'Queue entry timeout':'Várólista érvényességi idő',
+'Time the e-mail entry is valid in the queue in minutes':'A várólista bejegyzésének érvényességi ideje percben',
 '!=': '!=',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN',
 '%(nrows)s records found': '%(nrows)s records found',
@@ -115,7 +117,7 @@
 'Mail text': 'Mail szövege',
 'MailCaptcha Apply on': 'MailCaptcha Ezekre alkalmaz',
 'MailCaptcha Blacklist': 'MailCaptcha Tiltólista',
-'MailCaptcha Queue': 'MailCaptcha Várakozó sor',
+'MailCaptcha Queue': 'MailCaptcha Várólista',
 'MailCaptcha Scheduler run': 'MailCaptcha Scheduler run',
 'MailCaptcha Scheduler task': 'MailCaptcha Scheduler task',
 'MailCaptcha Settings': 'MailCaptcha Beállítások',
@@ -152,7 +154,7 @@
 'Python': 'Python',
 'Query': 'Keresés',
 'Query:': 'Lekérdezés:',
-'Queue': 'Várakozó sor',
+'Queue': 'Várólista',
 'Quick Examples': 'Quick Examples',
 'Recaptcha options': 'Recaptcha options',
 'Recaptcha private key': 'Recaptcha private key',
