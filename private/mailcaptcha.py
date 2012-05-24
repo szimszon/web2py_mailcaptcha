@@ -5,6 +5,7 @@
 #
 # python ./web2py.py -R applications/mailcaptcha/private/mailcaptcha.py -S mailcaptcha -M
 # #####################################################################################
+import datetime
 
 import logging
 logger = logging.getLogger( "web2py.app.mailcaptcha" )
@@ -90,6 +91,7 @@ class MyTCPHandler( SocketServer.StreamRequestHandler ):
 				client_address = self.data['client_address'] if self.data.has_key( 'client_address' ) else None
 				client_name = self.data['client_name'] if self.data.has_key( 'client_name' ) else None
 				helo_name = self.data['helo_name'] if self.data.has_key( 'helo_name' ) else None
+				db.plugin_mailcaptcha_queue.created_on.default = datetime.datetime.now()
 				id = db.plugin_mailcaptcha_queue.insert( email = str( self.data['sender'] ).lower(),
 																								client_address = client_address,
 																								client_name = client_name,
