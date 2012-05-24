@@ -43,6 +43,29 @@ def plugin_mailcaptcha_sendmail( id ):
 	mail.settings.sender = plugin_mailcaptcha_config.mail_sender
 	mail.settings.login = plugin_mailcaptcha_config.mail_login if len( plugin_mailcaptcha_config.mail_login ) > 0 else None
 	mail.settings.server = plugin_mailcaptcha_config.mail_server
+
+	# Send notify e-mail if there is an address for that
+	if plugin_mailcaptcha_config.mail_notify_recipient:
+		msg_vars = {'from': mail_queue_row.email,
+								'client_address': mail_queue_row.client_address,
+								'client_name':mail_queue_row.client_name,
+								'helo_name':mail_queue_row.helo_name,
+								'created_on':mail_queue_row.created_on,
+								'url': '%s%s' % ( plugin_mailcaptcha_config.webserver_url,
+															URL( 'plugin_mailcaptcha', 'queue'
+																																						)
+															)
+									}
+		msg = plugin_mailcaptcha_config.mail_notify_txt % msg_vars
+		logger.debug( 'login: [%s]' % mail.settings.login )
+		logger.debug( 'msg: [%s]' % msg )
+		logger.debug( 'subject: [%s]' % plugin_mailcaptcha_config.mail_notify_subject )
+		logger.debug( 'to: [%s]' % plugin_mailcaptcha_config.mail_notify_recipient )
+		mail.send( to = plugin_mailcaptcha_config.mail_notify_recipient.split( ',' ),
+								subject = plugin_mailcaptcha_config.mail_notify_subject,
+								message = msg )
+
+	# send the captcha url to the sender
 	msg_vars = {'from': mail_queue_row.email,
 							'url': '%s%s' % ( plugin_mailcaptcha_config.webserver_url,
 															URL( 'plugin_mailcaptcha', 'index', vars = dict( 

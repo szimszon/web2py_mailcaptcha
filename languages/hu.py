@@ -1,5 +1,10 @@
 # coding: utf8
 {
+'Mail notify recipient':'Értesítési levél cím',
+'Comma separated list. If it\'s empty no notify will be sent.':'Vesszővel elválasztott lista. Ha üres, nem lesz értesítés küldve.',
+'Mail notify subject':'Értesítési levél tárgya',
+'Mail notify text':'Éretsítési levél szövege',
+'%(from)s - from email address, %(client_address)s - client address, %(client_name)s - client name, %(helo_name)s - helo name, %(created_on)s - created on, %(url)s - admin url':'%(from)s - küldő e-mail címe, %(client_address)s - kliens címe, %(client_name)s - kliens neve, %(helo_name)s - helo neve, %(created_on)s - beérkezés időpontja, %(url)s - admin url',
 'Queue entry timeout':'Várólista érvényességi idő',
 'Time the e-mail entry is valid in the queue in minutes':'A várólista bejegyzésének érvényességi ideje percben',
 '!=': '!=',
