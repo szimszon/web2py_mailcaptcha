@@ -107,6 +107,30 @@ def to_whitelist():
 		raise HTTP( 'Invalid request' )
 	if db( db.plugin_mailcaptcha_whitelist.email == request.vars.email ).count() == 0:
 		db.plugin_mailcaptcha_whitelist.insert( email = request.vars.email )
+
+	#
+	# Send mail to the sender that the e-mail address is approved by the admin
+	# ######################################################################### 
+	# if there is x.509 cert we set up to sign the mail
+	if plugin_mailcaptcha_config.x509_sign_keyfile and \
+		plugin_mailcaptcha_config.x509_sign_certfile and \
+		plugin_mailcaptcha_config.x509_sign_passphrase:
+		mail.settings.cipher_type = 'x509'
+		mail.settings.sign = True
+		mail.settings.sign_passphrase = plugin_mailcaptcha_config.x509_sign_passphrase
+		mail.settings.encrypt = False
+		mail.settings.x509_sign_keyfile = x509_sign_keyfile
+		mail.settings.x509_sign_certfile = x509_sign_certfile
+
+	mail.settings.sender = plugin_mailcaptcha_config.mail_sender
+	mail.settings.login = plugin_mailcaptcha_config.mail_login if len( plugin_mailcaptcha_config.mail_login ) > 0 else None
+	mail.settings.server = plugin_mailcaptcha_config.mail_server
+	msg_vars = {'from': request.vars.email}
+	msg = plugin_mailcaptcha_config.mail_admin_approval_txt % msg_vars
+	mail.send( to = [request.vars.email],
+							subject = plugin_mailcaptcha_config.mail_admin_approval_subject,
+							message = msg )
+
 	return dict()
 
 @auth.requires_signature()

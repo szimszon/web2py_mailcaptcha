@@ -11,7 +11,10 @@ if 0:
 	settings = Storage()
 
 import uuid
-
+auth.signature.created_by.label = T( auth.signature.created_by.label )
+auth.signature.created_on.label = T( auth.signature.created_on.label )
+auth.signature.modified_by.label = T( auth.signature.modified_by.label )
+auth.signature.modified_on.label = T( auth.signature.modified_on.label )
 db.define_table( 'plugin_mailcaptcha_queue',
 							Field( 'uuid', 'string',
 									label = T( 'UUID' ),
@@ -102,6 +105,14 @@ db.define_table( 'plugin_mailcaptcha_settings',
 									label = T( 'Mail text' ),
 									requires = IS_NOT_EMPTY(),
 									comment = T( '%(url)s - URL, %(from)s - from email address' ),
+									),
+							Field( 'mail_admin_approval_subject', 'string',
+									label = T( 'Admin approval subject' ),
+									),
+							Field( 'mail_admin_approval_txt', 'text',
+									label = T( 'Admin approval text' ),
+									requires = IS_NOT_EMPTY(),
+									comment = T( '%(from)s - from email address' ),
 									),
 							Field( 'x509_sign_keyfile', 'string',
 									label = T( 'X.509 sign keyfile' ),
