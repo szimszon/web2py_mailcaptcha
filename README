@@ -1,0 +1,22 @@
+MailCaptcha
+===========
+
+For e-mail address protection with recaptcha for postfix.
+
+If somebody send an e-mail to a protected address the MailCaptcha
+defer it with 4xx temporary failure and send an e-mail to the
+sender with the URL where the sender can solve the captcha and get
+their e-mail address to the whitelist. After that the mail system
+is accepting that e-mail address.
+
+There is a
+* whitelist
+* blacklist
+* notification to the mail system administrator
+* sent mail can be signed with x.509 certificate
+
+Requirements
+============
+
+* web2py 1.99.7 (http://web2py.com)
+* postfix (http://postfix.com)
