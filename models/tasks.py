@@ -39,6 +39,7 @@ def plugin_mailcaptcha_sendmail( id ):
 		mail.settings.encrypt = False
 		mail.settings.x509_sign_keyfile = x509_sign_keyfile
 		mail.settings.x509_sign_certfile = x509_sign_certfile
+		mail.settings.x509_nocerts = True
 
 	mail.settings.sender = plugin_mailcaptcha_config.mail_sender
 	mail.settings.login = plugin_mailcaptcha_config.mail_login if len( plugin_mailcaptcha_config.mail_login ) > 0 else None
