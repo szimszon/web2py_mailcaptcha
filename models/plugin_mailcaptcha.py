@@ -35,12 +35,15 @@ db.define_table( 'plugin_mailcaptcha_queue',
 							Field( 'helo_name', 'string',
 									label = T( 'Helo name' ),
 									),
+							Field( 'recipient', 'string',
+									label = T( 'Recipient' ),
+									),
 							auth.signature
  )
 db.plugin_mailcaptcha_queue.created_on.readable = True
 db.define_table( 'plugin_mailcaptcha_whitelist',
 							Field( 'email', 'string',
-									label = T( 'E-mail' ),
+									label = T( 'E-mail / Domain' ),
 									requires = IS_NOT_EMPTY(),
 									),
 							auth.signature
@@ -51,7 +54,7 @@ db.plugin_mailcaptcha_whitelist.modified_by.readable = True
 db.plugin_mailcaptcha_whitelist.modified_on.readable = True
 db.define_table( 'plugin_mailcaptcha_blacklist',
 							Field( 'email', 'string',
-									label = T( 'E-mail' ),
+									label = T( 'E-mail / Domain' ),
 									requires = IS_NOT_EMPTY(),
 									),
 							auth.signature
@@ -123,7 +126,7 @@ db.define_table( 'plugin_mailcaptcha_settings',
 									),
 							Field( 'mail_notify_txt', 'text',
 									label = T( 'Mail notify text' ),
-									comment = T( '%(from)s - from email address, %(client_address)s - client address, %(client_name)s - client name, %(helo_name)s - helo name, %(created_on)s - created on, %(url)s - admin url' ),
+									comment = T( '%(from)s - from email address, %(client_address)s - client address, %(client_name)s - client name, %(helo_name)s - helo name, %(recipient)s - recipient, %(created_on)s - created on, %(url)s - admin url' ),
 									),
 							Field( 'x509_sign_keyfile', 'string',
 									label = T( 'X.509 sign keyfile' ),

@@ -1,9 +1,10 @@
 # coding: utf8
 {
+'Recipient':'Címzett',
 '!=': '!=',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN',
 '%(from)s - from email address': '%(from)s - from email address',
-'%(from)s - from email address, %(client_address)s - client address, %(client_name)s - client name, %(helo_name)s - helo name, %(created_on)s - created on, %(url)s - admin url': '%(from)s - küldő e-mail címe, %(client_address)s - kliens címe, %(client_name)s - kliens neve, %(helo_name)s - helo neve, %(created_on)s - beérkezés időpontja, %(url)s - admin url',
+'%(from)s - from email address, %(client_address)s - client address, %(client_name)s - client name, %(helo_name)s - helo name, %(recipient)s - recipient, %(created_on)s - created on, %(url)s - admin url': '%(from)s - küldő e-mail címe, %(client_address)s - kliens címe, %(client_name)s - kliens neve, %(helo_name)s - helo neve, %(recipient)s - címzett, %(created_on)s - beérkezés időpontja, %(url)s - admin url',
 '%(nrows)s records found': '%(nrows)s records found',
 '%(url)s - URL, %(from)s - from email address': '%(url)s - URL, %(from)s - from email address',
 '%(url)s - URL, %(from)s - from email address, %(to) - to email address': '%(url)s - URL, %(from)s - from email address, %(to) - to email address',
@@ -62,6 +63,7 @@
 "Don't know what to do?": "Don't know what to do?",
 'Download': 'Download',
 'E-mail': 'E-mail',
+'E-mail / Domain': 'E-mail / Domén név',
 'E-mail address accepted': 'Elfogadtuk az e-mail címet',
 'Edit': 'Szerkeszt',
 'Edit This App': 'Alkalmazást szerkeszt',

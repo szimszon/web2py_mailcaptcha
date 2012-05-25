@@ -50,6 +50,7 @@ def plugin_mailcaptcha_sendmail( id ):
 								'client_address': mail_queue_row.client_address,
 								'client_name':mail_queue_row.client_name,
 								'helo_name':mail_queue_row.helo_name,
+								'recipient':mail_queue_row.recipient,
 								'created_on':mail_queue_row.created_on,
 								'url': '%s%s' % ( plugin_mailcaptcha_config.webserver_url,
 															URL( 'plugin_mailcaptcha', 'queue'
