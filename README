@@ -20,3 +20,14 @@ Requirements
 
 * web2py 1.99.7 (http://web2py.com)
 * postfix (http://postfix.com)
+
+Credit
+======
+
+The main idea is from:
+ http://www.kfki.hu/cnc/projekt/postfilter/indexeng.html
+ http://www.kfki.hu/cnc/projekt/postfilter/docs/README.txt
+
+ József Kadlecsik
+
+ together with the members of "CSI-KO Csillebérci Komputer" Company.
