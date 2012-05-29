@@ -102,7 +102,10 @@ class MyTCPHandler( SocketServer.StreamRequestHandler ):
 				db.scheduler_task.insert( 
 																task_name = self.data['sender'],
 																function_name = 'plugin_mailcaptcha_sendmail',
-																args = '[%s]' % id
+																args = '[%s]' % id,
+																start_time = datetime.datetime.now(),
+																next_run_time = datetime.datetime.now(),
+																stop_time = datetime.datetime.now() + datetime.timedelta( days = 1 )
 																)
 				db.commit()
 				logger.info( '[%s] set up in queue' % str( self.data['sender'] ) )
