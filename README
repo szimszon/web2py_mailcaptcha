@@ -10,8 +10,9 @@ their e-mail address to the whitelist. After that the mail system
 is accepting the e-mail address.
 
 There is a
-* whitelist (you can put e-mail address or only domain it without @)
-* blacklist (you can put e-mail address or only domain it without @)
+* whitelist (you can put e-mail address or only domain in it without @)
+* blacklist (you can put e-mail address or only domain in it without @)
+* honeypot e-mail list (you can put e-mail address or only domain in it without @)
 * notification to the mail system administrator
 * sent mail can be signed with x.509 certificate
 

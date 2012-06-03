@@ -48,13 +48,13 @@ class MyTCPHandler( SocketServer.StreamRequestHandler ):
 				# see if recipient is in apply_on list
 				# #####################################
 				try:
-					domain = str( self.data['recipient'] ).lower().split( '@', 1 )[1]
+					recipient_domain = str( self.data['recipient'] ).lower().split( '@', 1 )[1]
 				except:
 					logger.warning( 'Invalid recipient: [%s]' % str( self.data['recipient'] ) )
 					self.wfile.write( RET_DUNNO )
 					return True
 				if db( db.plugin_mailcaptcha_apply_on.email.lower() == str( self.data['recipient'] ).lower() ).count() == 0 and \
-					db( db.plugin_mailcaptcha_apply_on.email.lower() == domain ).count() == 0:
+					db( db.plugin_mailcaptcha_apply_on.email.lower() == recipient_domain ).count() == 0:
 					logger.debug( "Don't need to be processed" )
 					self.wfile.write( RET_DUNNO )
 					return True
@@ -71,6 +71,17 @@ class MyTCPHandler( SocketServer.StreamRequestHandler ):
 				if db( db.plugin_mailcaptcha_blacklist.email.lower() == str( self.data['sender'] ).lower() ).count() > 0 or \
 					db( db.plugin_mailcaptcha_blacklist.email.lower() == domain ).count() > 0:
 					logger.info( '[%s] in backlist' % str( self.data['sender'] ) )
+					self.wfile.write( RET_REJECT )
+					return True
+
+				# check honeypot
+				if db( db.plugin_mailcaptcha_honeypot.email.lower() == str( self.data['recipient'] ).lower() ).count() > 0 or \
+					db( db.plugin_mailcaptcha_honeypot.email.lower() == recipient_domain ).count() > 0:
+					db.plugin_mailcaptcha_blacklist.created_on.default = datetime.datetime.now()
+					db.plugin_mailcaptcha_blacklist.modified_on.default = datetime.datetime.now()
+					db.plugin_mailcaptcha_blacklist.insert( email = self.data['sender'] )
+					db.commit()
+					logger.info( '[%s] sent mail in to the honeypot put in the blacklist' % ( str( self.data['sender'] ) ) )
 					self.wfile.write( RET_REJECT )
 					return True
 

@@ -74,6 +74,18 @@ db.plugin_mailcaptcha_apply_on.created_by.readable = True
 db.plugin_mailcaptcha_apply_on.created_on.readable = True
 db.plugin_mailcaptcha_apply_on.modified_by.readable = True
 db.plugin_mailcaptcha_apply_on.modified_on.readable = True
+db.define_table( 'plugin_mailcaptcha_honeypot',
+							Field( 'email', 'string',
+									label = T( 'E-mail' ),
+									requires = IS_NOT_EMPTY(),
+									comment = T( 'If this e-mail address receives mail than the sender goes to the blacklist.' )
+									),
+							auth.signature
+ )
+db.plugin_mailcaptcha_honeypot.created_by.readable = True
+db.plugin_mailcaptcha_honeypot.created_on.readable = True
+db.plugin_mailcaptcha_honeypot.modified_by.readable = True
+db.plugin_mailcaptcha_honeypot.modified_on.readable = True
 db.define_table( 'plugin_mailcaptcha_settings',
 							Field( 'webserver_url', 'string',
 									label = T( 'Webserver url' ),
@@ -186,6 +198,7 @@ if auth.user:
 										( T( 'Whitelist' ), True, URL( 'plugin_mailcaptcha', 'whitelist' ), [] ),
 										( T( 'Blacklist' ), True, URL( 'plugin_mailcaptcha', 'blacklist' ), [] ),
 										( T( 'Apply on' ), True, URL( 'plugin_mailcaptcha', 'apply_on' ), [] ),
+										( T( 'Honeypot' ), True, URL( 'plugin_mailcaptcha', 'honeypot' ), [] ),
 										( T( 'Settings' ), True, URL( 'plugin_mailcaptcha', 'settings' ), [] ),
 										( T( 'Queue' ), True, URL( 'plugin_mailcaptcha', 'queue' ), [] ),
 										( T( 'Task' ), True, URL( 'plugin_mailcaptcha', 'scheduler_task' ), [] ),

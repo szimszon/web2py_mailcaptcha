@@ -63,6 +63,11 @@ def apply_on():
 																	orderby = db.plugin_mailcaptcha_apply_on.email ) )
 
 @auth.requires_login()
+def honeypot():
+	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_honeypot,
+																	orderby = db.plugin_mailcaptcha_honeypot.email ) )
+
+@auth.requires_login()
 def settings():
 	return dict( grid = SQLFORM.grid( db.plugin_mailcaptcha_settings ) )
 

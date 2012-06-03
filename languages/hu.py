@@ -1,5 +1,8 @@
 # coding: utf8
 {
+'Honeypot':'Mézesbödön',
+'If this e-mail address receives mail than the sender goes to the blacklist.':'Ha erre az e-mail címre érkezik levél akkor a feladó tiltólistába kerül.',
+'MailCaptcha Honeypot':'MailCaptcha Mézesbödön',
 'Recipient':'Címzett',
 '!=': '!=',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN',
