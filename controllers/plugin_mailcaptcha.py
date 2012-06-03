@@ -118,8 +118,8 @@ def to_whitelist():
 			mail.settings.sign = True
 			mail.settings.sign_passphrase = plugin_mailcaptcha_config.x509_sign_passphrase
 			mail.settings.encrypt = False
-			mail.settings.x509_sign_keyfile = x509_sign_keyfile
-			mail.settings.x509_sign_certfile = x509_sign_certfile
+			mail.settings.x509_sign_keyfile = plugin_mailcaptcha_config.x509_sign_keyfile
+			mail.settings.x509_sign_certfile = plugin_mailcaptcha_config.x509_sign_certfile
 
 		mail.settings.sender = plugin_mailcaptcha_config.mail_sender
 		mail.settings.login = plugin_mailcaptcha_config.mail_login if len( plugin_mailcaptcha_config.mail_login ) > 0 else None
