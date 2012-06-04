@@ -75,8 +75,10 @@ class MyTCPHandler( SocketServer.StreamRequestHandler ):
 					return True
 
 				# check honeypot
-				if db( db.plugin_mailcaptcha_honeypot.email.lower() == str( self.data['recipient'] ).lower() ).count() > 0 or \
-					db( db.plugin_mailcaptcha_honeypot.email.lower() == recipient_domain ).count() > 0:
+				if db( ( db.plugin_mailcaptcha_apply_on.email.lower() == str( self.data['recipient'] ).lower() ) & \
+						( db.plugin_mailcaptcha_apply_on.is_honeypot == True ) ).count() > 0 or \
+					db( ( db.plugin_mailcaptcha_apply_on.email.lower() == recipient_domain ) & \
+						( db.plugin_mailcaptcha_apply_on.is_honeypot == True ) ).count() > 0:
 					db.plugin_mailcaptcha_blacklist.created_on.default = datetime.datetime.now()
 					db.plugin_mailcaptcha_blacklist.modified_on.default = datetime.datetime.now()
 					db.plugin_mailcaptcha_blacklist.insert( email = self.data['sender'] )
