@@ -33,9 +33,9 @@ What does this?
  4. else if the sender is in the whitelist do nothing special
  5. else if the sender is in the waiting queue the message get a temporary rejection with 4xx code
  6. else if the sender is not in queue then
-  - put the sender address in the waiting queue
-  - send a mail to the sender address with the web url where the sender can solve the captcha and so the sender address is going to the whitelist
-  - optionally send a mail to mail system admin to notify about a new sender address in the waiting queue so admin can enable the sender address by hand
+   put the sender address in the waiting queue
+   send a mail to the sender address with the web url where the sender can solve the captcha and so the sender address is going to the whitelist
+   optionally send a mail to mail system admin to notify about a new sender address in the waiting queue so admin can enable the sender address by hand
 3. the sender have to go to the web url and solve the captcha
 4. sender address is going to the whitelist
 5. the next time the sender's mail system (the system that hold the sender's mail) try to deliver the e-mail after temporary failure can deliver the message without problem
