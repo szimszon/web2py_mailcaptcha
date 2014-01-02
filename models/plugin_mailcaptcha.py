@@ -70,7 +70,6 @@ db.define_table( 'plugin_mailcaptcha_apply_on',
 									),
 							Field( 'is_honeypot', 'boolean',
 									label = T( 'Honeypot' ),
-									requires = IS_NOT_EMPTY(),
 									comment = T( 'If this e-mail address receives mail than the sender goes to the blacklist.' )
 									),
 							auth.signature
